@@ -11,17 +11,17 @@ abstract class Styles {
     fontWeight: FontWeight.normal,
   );
 
-  static const titleStyle14 = TextStyle(
+  static const textStyle14 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.normal,
   );
 
-    static const titleStyle16 = TextStyle(
+    static const textStyle16 = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
-     static const titleStyle30 = TextStyle(
+     static const textStyle30 = TextStyle(
     fontSize: 30,
-    fontWeight: FontWeight.normal,fontFamily: kGtSectraFine,
+    fontWeight: FontWeight.w900,fontFamily: kGtSectraFine,
   );
 }
