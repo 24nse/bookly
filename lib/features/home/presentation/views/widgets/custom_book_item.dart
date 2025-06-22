@@ -10,7 +10,7 @@ class CustomBookImage extends StatelessWidget {
        
           height: MediaQuery.of(context).size.height*.3,
       child: AspectRatio(
-        aspectRatio: 2.7/4,
+        aspectRatio: 2.6/4,
         child: Container(
         
           
