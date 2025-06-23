@@ -1,3 +1,4 @@
+import 'package:bookly/core/utils/styles.dart';
 import 'package:bookly/features/home/presentation/views/widgets/best_seller_list_view_item.dart';
 import 'package:bookly/features/search/presentation/views/widgets/custom_search_text_field.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,12 @@ class SearchViewBody extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 8,),
           CustomSearchTextField(),
           SizedBox(height: 16,),
-          Text("Search Result"),
+          Text("Search Result",style: Styles.textStyle18,),
            SizedBox(height: 16,),
           Expanded(child: SearchResultListView())
         ],
