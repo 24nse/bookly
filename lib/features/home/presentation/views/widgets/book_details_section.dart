@@ -16,7 +16,7 @@ class BookDetailsSection extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * .2),
           child: const CustomBookImage(
-            imageUrl: 'https://www.bigfootdigital.co.uk/wp-content/uploads/2020/07/image-optimisation-scaled.jpg',
+            imageUrl: 'https://www.bigfootdigital.co.uk/wp-content/uploads/2020/07/image-optimisation-scaled.jpg ',
           ),
         ),
         const SizedBox(height: 43),
@@ -38,7 +38,10 @@ class BookDetailsSection extends StatelessWidget {
         ),
         const SizedBox(height: 18),
 
-        const BookRating(mainAxisAlignment: MainAxisAlignment.center),
+        const BookRating(
+          rating: 5,
+          count: 30,
+          mainAxisAlignment: MainAxisAlignment.center),
         const SizedBox(height: 37),
         const BooksAction(),
       ],

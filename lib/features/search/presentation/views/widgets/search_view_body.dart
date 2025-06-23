@@ -4,7 +4,7 @@ import 'package:bookly/features/search/presentation/views/widgets/custom_search_
 import 'package:flutter/material.dart';
 
 class SearchViewBody extends StatelessWidget {
-  const SearchViewBody({super.key});
+  const SearchViewBody({super.key}); 
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,8 @@ class SearchResultListView extends StatelessWidget {
         
                 return const Padding(
                   padding:  EdgeInsets.symmetric(vertical: 10),
-                  child:  BookListViewItem(),
+                  // child:  BookListViewItem(),
+                  child: Text("data"),
                 );
     
       },
