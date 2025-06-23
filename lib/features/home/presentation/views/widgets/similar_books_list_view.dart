@@ -16,7 +16,9 @@ class SimilarBooksListView extends StatelessWidget {
           
           return const Padding(
             padding:  EdgeInsets.symmetric(horizontal: 5),
-            child:  CustomBookImage(),
+            child:  CustomBookImage(
+              imageUrl: 'https://www.bigfootdigital.co.uk/wp-content/uploads/2020/07/image-optimisation-scaled.jpg',
+            ),
           );
         },
       ),
