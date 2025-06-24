@@ -17,7 +17,7 @@ final BookModel bookModel;
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * .2),
           child:  CustomBookImage(
-            imageUrl:bookModel.volumeInfo.imageLinks?.thumbnail ?? 'https://www.bigfootdigital.co.uk/wp-content/uploads/2020/07/image-optimisation-scaled.jpg ',
+            imageUrl:bookModel.volumeInfo.imageLinks?.thumbnail ?? 'https://www.bigfootdigital.co.uk/wp-content/uploads/2020/07/image-optimisation-scaled.jpg',
           ),
         ),
         const SizedBox(height: 43),

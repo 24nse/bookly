@@ -22,7 +22,7 @@ class FeatutedBooksListView extends StatelessWidget {
               itemCount: state.books.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                print("GGGGGGGGGGGGGGGg  ${state.books[index].volumeInfo.imageLinks?.thumbnail}");
+              
                 return  Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   child: GestureDetector(
@@ -30,8 +30,8 @@ class FeatutedBooksListView extends StatelessWidget {
                           GoRouter.of(context).push(AppRouter.kBookDetailsView,extra: state.books[index]);
                     },
                     child: CustomBookImage(
-                      
-                      imageUrl: state.books[index].volumeInfo.imageLinks!.thumbnail ,
+
+                      imageUrl: state.books[index].volumeInfo.imageLinks!.thumbnail,
                     ),
                   ),
                 );
