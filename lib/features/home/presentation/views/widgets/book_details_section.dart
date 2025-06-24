@@ -45,7 +45,7 @@ final BookModel bookModel;
           count: bookModel.volumeInfo.ratingsCount??0,
           mainAxisAlignment: MainAxisAlignment.center),
         const SizedBox(height: 37),
-        const BooksAction(),
+         BooksAction(bookModel: bookModel,),
       ],
     );
   }
