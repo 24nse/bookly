@@ -1,8 +1,5 @@
-
-
 import 'package:bookly/conastans.dart';
 import 'package:bookly/core/utils/app_router.dart';
-import 'package:bookly/core/utils/assets.dart';
 import 'package:bookly/core/utils/styles.dart';
 import 'package:bookly/features/home/data/models/models/book_model/book_model.dart';
 import 'package:bookly/features/home/presentation/views/widgets/book_rating.dart';
@@ -24,7 +21,7 @@ final  BookModel book ;
         height: 125,
         child: Row(
           children: [
-            CustomBookImage(imageUrl: book.volumeInfo.imageLinks!.thumbnail),
+            CustomBookImage(imageUrl: book.volumeInfo.imageLinks?.thumbnail ?? 'assets/images/Logo.png'),
             // AspectRatio(
             //   aspectRatio: 2.5 / 4,
             //   child: Container(
@@ -46,7 +43,7 @@ final  BookModel book ;
                   SizedBox(
                     width: MediaQuery.of(context).size.width * .5,
                     child:  Text(
-                      book.volumeInfo.title!,
+                      book.volumeInfo.title ?? 'Title not available',
                       style: Styles.textStyle20.copyWith(
                         fontFamily: kGtSectraFine
                       ),
@@ -55,7 +52,14 @@ final  BookModel book ;
                     ),
                   ),
                  const SizedBox(height: 3,),
-                  Text(book.volumeInfo.authors![0],style: Styles.textStyle14,),
+                  Text(
+                    (book.volumeInfo.authors?.isNotEmpty ?? false)
+                      ? book.volumeInfo.authors!.first
+                      : 'Unknown Author',
+                    style: Styles.textStyle14,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                                            const SizedBox(height: 3,),
               
                  Row(

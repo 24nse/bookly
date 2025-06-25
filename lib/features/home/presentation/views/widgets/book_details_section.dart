@@ -22,7 +22,7 @@ final BookModel bookModel;
         ),
         const SizedBox(height: 43),
         Text(
-          bookModel.volumeInfo.title!,
+          bookModel.volumeInfo.title ?? 'Title not available',
           style: Styles.textStyle30.copyWith(fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
@@ -31,7 +31,9 @@ final BookModel bookModel;
         Opacity(
           opacity: .7,
           child: Text(
-            bookModel.volumeInfo.authors?[0]??'',
+            (bookModel.volumeInfo.authors?.isNotEmpty ?? false)
+              ? bookModel.volumeInfo.authors!.first
+              : 'Unknown Author',
             style: Styles.textStyle18.copyWith(
               fontStyle: FontStyle.italic,
               fontWeight: FontWeight.w500,
