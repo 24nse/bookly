@@ -11,6 +11,7 @@ class BestSellerListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewsetBooksCubit, NewsetBooksState>(
+      buildWhen: (previous, current) => previous.runtimeType != current.runtimeType,
       builder: (context, state) {
         if (state is NewsetBooksSuccess) {
   return ListView.builder(

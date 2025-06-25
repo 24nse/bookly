@@ -35,6 +35,7 @@ class SearchResultListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchCubit, SearchState>(
+      buildWhen: (previous, current) => previous.runtimeType != current.runtimeType,
       builder: (context, state) {
         if (state is SearchLoading) {
           return const Center(child: CircularProgressIndicator());

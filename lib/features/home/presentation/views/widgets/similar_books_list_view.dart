@@ -13,6 +13,7 @@ class SimilarBooksListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SimilarBooksCubit, SimilarBooksState>(
+      buildWhen: (previous, current) => previous.runtimeType != current.runtimeType,
       builder: (context, state) {
         if (state is SimilarBooksSuccess) {
   return SizedBox(

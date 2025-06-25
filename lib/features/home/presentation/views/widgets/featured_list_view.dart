@@ -13,6 +13,7 @@ class FeatutedBooksListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FeaturedBooksCubit, FeaturedBooksState>(
+      buildWhen: (previous, current) => previous.runtimeType != current.runtimeType,
       builder: (context, state) {
         if (state is FeaturedBooksSuccess) {
           return SizedBox(
