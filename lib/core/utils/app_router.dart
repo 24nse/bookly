@@ -8,6 +8,7 @@ import 'package:bookly/features/search/presentation/views/search_view.dart';
 import 'package:bookly/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter/material.dart';
 
 abstract class AppRouter {
   static const kHomeView = '/homeview';
@@ -20,12 +21,20 @@ abstract class AppRouter {
       GoRoute(path: kHomeView, builder: (context, state) => const HomeView()),
       GoRoute(
         path: kBookDetailsView,
-        builder: (context, state) => BlocProvider(
-          create: (context) => SimilarBooksCubit(
-            getIt.get<HomeRepoImpl>()
-          ),
-          child:  BookDetailsView(bookModel: state.extra as BookModel ,),
-        ),
+        builder: (context, state) {
+          final extra = state.extra;
+          if (extra == null || extra is! BookModel) {
+            return const Scaffold(
+              body: Center(child: Text('Book not found!')),
+            );
+          }
+          return BlocProvider(
+            create: (context) => SimilarBooksCubit(
+              getIt.get<HomeRepoImpl>()
+            ),
+            child:  BookDetailsView(bookModel: extra),
+          );
+        },
       ),
       GoRoute(
         path: kSearchView,
