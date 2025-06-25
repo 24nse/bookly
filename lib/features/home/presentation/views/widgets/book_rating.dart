@@ -1,7 +1,7 @@
-
 import 'package:bookly/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:bookly/core/widgets/custom_text.dart';
 
 class BookRating extends StatelessWidget {
   const BookRating({super.key,  this.mainAxisAlignment=MainAxisAlignment.start, required this.rating, required this.count});
@@ -22,11 +22,11 @@ class BookRating extends StatelessWidget {
         ),
         SizedBox(width: 6.3 ,),
 
-        Text("${rating}",style: Styles.textStyle16,),
+        CustomText("${rating}",style: Styles.textStyle16,),
         SizedBox(width: 5,),
        Opacity(
         opacity: .5,
-        child: Text("(${count})",style: Styles.textStyle14.copyWith(
+        child: CustomText("(${count})",style: Styles.textStyle14.copyWith(
           fontWeight: FontWeight.w600
         ))),
 

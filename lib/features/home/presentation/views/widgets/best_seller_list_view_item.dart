@@ -6,6 +6,7 @@ import 'package:bookly/features/home/presentation/views/widgets/book_rating.dart
 import 'package:bookly/features/home/presentation/views/widgets/custom_book_item.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:bookly/core/widgets/custom_text.dart';
 
 class BookListViewItem extends StatelessWidget {
   const BookListViewItem({super.key, required this.book});
@@ -42,7 +43,7 @@ final  BookModel book ;
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * .5,
-                    child:  Text(
+                    child:  CustomText(
                       book.volumeInfo.title ?? 'Title not available',
                       style: Styles.textStyle20.copyWith(
                         fontFamily: kGtSectraFine
@@ -52,7 +53,7 @@ final  BookModel book ;
                     ),
                   ),
                  const SizedBox(height: 3,),
-                  Text(
+                  CustomText(
                     (book.volumeInfo.authors?.isNotEmpty ?? false)
                       ? book.volumeInfo.authors!.first
                       : 'Unknown Author',
@@ -64,7 +65,7 @@ final  BookModel book ;
               
                  Row(
                   children: [
-                    Text("Free",style: Styles.textStyle20.copyWith(
+                    CustomText("Free",style: Styles.textStyle20.copyWith(
                       fontWeight: FontWeight.bold
                     ),),
                    const Spacer(),

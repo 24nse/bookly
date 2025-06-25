@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bookly/features/search/presentation/view_models/search_cubit/search_cubit.dart';
 import 'package:bookly/features/search/presentation/view_models/search_cubit/search_state.dart';
+import 'package:bookly/core/widgets/custom_text.dart';
 
 class SearchViewBody extends StatelessWidget {
   const SearchViewBody({super.key}); 
@@ -19,7 +20,7 @@ class SearchViewBody extends StatelessWidget {
           SizedBox(height: 8,),
           CustomSearchTextField(),
           SizedBox(height: 16,),
-          Text("Search Result",style: Styles.textStyle18,),
+          CustomText("Search Result",style: Styles.textStyle18,),
           SizedBox(height: 16,),
           Expanded(child: SearchResultListView())
         ],
@@ -39,7 +40,7 @@ class SearchResultListView extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         } else if (state is SearchSuccess) {
           if (state.books.isEmpty) {
-            return const Center(child: Text('No results found'));
+            return Center(child: CustomText('No results found'));
           }
           return ListView.builder(
             padding: EdgeInsets.zero,
@@ -52,7 +53,7 @@ class SearchResultListView extends StatelessWidget {
             },
           );
         } else if (state is SearchFailure) {
-          return Center(child: Text(state.message));
+          return Center(child: CustomText(state.message));
         }
         return const SizedBox();
       },

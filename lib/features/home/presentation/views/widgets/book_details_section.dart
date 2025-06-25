@@ -4,6 +4,7 @@ import 'package:bookly/features/home/presentation/views/widgets/book_rating.dart
 import 'package:bookly/features/home/presentation/views/widgets/books_action.dart';
 import 'package:bookly/features/home/presentation/views/widgets/custom_book_item.dart';
 import 'package:flutter/material.dart';
+import 'package:bookly/core/widgets/custom_text.dart';
 
 class BookDetailsSection extends StatelessWidget {
   const     BookDetailsSection({super.key, required this.bookModel});
@@ -21,7 +22,7 @@ final BookModel bookModel;
           ),
         ),
         const SizedBox(height: 43),
-        Text(
+        CustomText(
           bookModel.volumeInfo.title ?? 'Title not available',
           style: Styles.textStyle30.copyWith(fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
@@ -30,7 +31,7 @@ final BookModel bookModel;
 
         Opacity(
           opacity: .7,
-          child: Text(
+          child: CustomText(
             (bookModel.volumeInfo.authors?.isNotEmpty ?? false)
               ? bookModel.volumeInfo.authors!.first
               : 'Unknown Author',

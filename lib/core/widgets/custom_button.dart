@@ -1,5 +1,6 @@
 import 'package:bookly/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:bookly/core/widgets/custom_text.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key, required this.backgroundColor, required this.textColor,  this.borderRadius,required this.text,this.fontSize, this.onPressed });
@@ -21,7 +22,7 @@ final void Function()? onPressed;
             borderRadius: borderRadius??BorderRadius.circular(12)
            )
         ),
-        child:Text(text,style: Styles.textStyle18.copyWith(
+        child: CustomText(text,style: Styles.textStyle18.copyWith(
           color: textColor,
           fontWeight: FontWeight.w900
         ),) ,

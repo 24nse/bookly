@@ -1,5 +1,6 @@
 import 'package:bookly/core/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:bookly/core/widgets/custom_text.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   const CustomErrorWidget({super.key, required this.errMessage});
@@ -7,7 +8,7 @@ class CustomErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Text(
+    return  CustomText(
       errMessage, 
       style:  Styles.textStyle18,
       textAlign: TextAlign.center,
