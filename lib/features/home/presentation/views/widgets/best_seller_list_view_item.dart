@@ -23,19 +23,7 @@ final  BookModel book ;
         child: Row(
           children: [
             CustomBookImage(imageUrl: book.volumeInfo.imageLinks?.thumbnail ?? 'assets/images/Logo.png'),
-            // AspectRatio(
-            //   aspectRatio: 2.5 / 4,
-            //   child: Container(
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(8),
-            //       color: Colors.red,
-            //       image: const DecorationImage(
-            //         fit: BoxFit.fill,
-            //         image: AssetImage(AssetsData.testImage),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+        
            const SizedBox(width: 30),
             Expanded(
               child: Column(
