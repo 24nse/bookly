@@ -32,7 +32,7 @@ class FeatutedBooksListView extends StatelessWidget {
                     },
                     child: CustomBookImage(
 
-                      imageUrl: state.books[index].volumeInfo.imageLinks?.thumbnail ?? 'assets/images/Logo.png',
+                      imageUrl: state.books[index].image ?? 'assets/images/Logo.png',
                     ),
                   ),
                 );

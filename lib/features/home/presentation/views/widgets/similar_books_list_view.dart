@@ -30,7 +30,7 @@ class SimilarBooksListView extends StatelessWidget {
               GoRouter.of(context).pushReplacement(AppRouter.kBookDetailsView,extra: state.books[index]);
             },
             child: CustomBookImage(
-              imageUrl: state.books[index].volumeInfo.imageLinks?.thumbnail?? 
+              imageUrl: state.books[index].image?? 
                   'https://www.bigfootdigital.co.uk/wp-content/uploads/2020/07/image-optimisation-scaled.jpg',
             ),
           ),
