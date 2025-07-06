@@ -26,9 +26,12 @@ final ApiService apiService;
   
 
   @override
-  Future<List<BookEntity>> fetchNewsetBooks() {
-    // TODO: implement fetchNewsetBooks
-    throw UnimplementedError();
+  Future<List<BookEntity>> fetchNewsetBooks()async {
+     var data = await apiService.get(
+        endPoint:  "volumes?Filtering=free-ebooks&Sorting=newest&q=subject:computer science",
+      );
+      List<BookEntity> books = getBooksList(data);
+      return books;
   }
 
 }
