@@ -18,16 +18,18 @@ class HomeRepoImpl implements HomeRepo {
   });
   @override
   Future<Either<Failures, List<BookEntity>>> fetchNewsetBooks() async {
-  
     try {
-        List<BookEntity> books;
+      List<BookEntity> books;
       books = homeLocalDataSource.fetchFeaturedBooks();
       if (books.isNotEmpty) {
-        return right(books); 
+        return right(books);
       }
       books = await homeRemoteDataSource.fetchFeaturedBooks();
       return right(books);
     } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
       return left(ServerFailure(e.toString()));
     }
   }
@@ -35,14 +37,17 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<Either<Failures, List<BookEntity>>> fetchFeaturedBooks() async {
     try {
-          List<BookEntity> books;
+      List<BookEntity> books;
       books = homeLocalDataSource.fetchNewsetBooks();
       if (books.isNotEmpty) {
-        return right(books); 
+        return right(books);
       }
       books = await homeRemoteDataSource.fetchNewsetBooks();
       return right(books);
     } catch (e) {
+           if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
       return left(ServerFailure(e.toString()));
     }
   }
