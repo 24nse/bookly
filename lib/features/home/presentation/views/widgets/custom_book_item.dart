@@ -20,7 +20,7 @@ class CustomBookImage extends StatelessWidget {
         child: _isValidUrl(imageUrl)
             ? CachedNetworkImage(
                 fit: BoxFit.fill,
-                imageUrl: 'https://cors-anywhere.herokuapp.com/$imageUrl',
+                imageUrl: imageUrl,
                 errorWidget: (context, url, error) => const Icon(Icons.error),
                 placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
               )
