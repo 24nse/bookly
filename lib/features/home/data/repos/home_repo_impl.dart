@@ -1,8 +1,6 @@
 import 'package:bookly/core/errors/failures.dart';
-import 'package:bookly/core/utils/api_service.dart';
 import 'package:bookly/features/home/data/data_sources/home_local_data_source.dart';
 import 'package:bookly/features/home/data/data_sources/home_remote_data_source.dart';
-import 'package:bookly/features/home/data/models/models/book_model/book_model.dart';
 import 'package:bookly/features/home/domain/repos/home_repo.dart';
 import 'package:bookly/features/home/domain/entities/book_entity.dart';
 import 'package:dartz/dartz.dart';
@@ -53,24 +51,22 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failures, List<BookEntity>>> fetchSimilarBooks({
-    required String category,
-  }) async {
-    try {
-      var data = await apiService.get(
-        endPoint:
-            "volumes?Filtering=free-ebooks&Sorting=relevance&q=subject:computer science",
-      );
-      List<BookEntity> books = [];
-      for (var item in data["items"]) {
-        books.add(BookModel.fromJson(item));
+  Future<Either<Failures, List<BookEntity>>> fetchSimilarBooks ()async {
+
+       try {
+      List<BookEntity> books;
+      books = homeLocalDataSource.fetchSimilarBooks();
+      if (books.isNotEmpty) {
+        return right(books);
       }
+      books = await homeRemoteDataSource.fetchSimilarBooks();
       return right(books);
     } catch (e) {
-      if (e is DioError) {
+           if (e is DioException) {
         return left(ServerFailure.fromDioError(e));
       }
       return left(ServerFailure(e.toString()));
     }
   }
+   
 }

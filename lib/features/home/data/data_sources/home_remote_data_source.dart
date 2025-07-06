@@ -8,6 +8,7 @@ import 'package:hive/hive.dart';
 abstract class HomeRemoteDataSource {
   Future<List<BookEntity>> fetchFeaturedBooks();
   Future<List<BookEntity>> fetchNewsetBooks();
+  Future<List<BookEntity>> fetchSimilarBooks();
 }
 
 class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
@@ -39,7 +40,21 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
         saveBooksData(books,KNewsetBox);
     return books;
   }
+  
+  @override
+  Future<List<BookEntity>> fetchSimilarBooks() async{
+  var data = await apiService.get(
+      endPoint:
+          "volumes?Filtering=free-ebooks&Sorting=newest&q=subject:computer science",
+    );
+    List<BookEntity> books = getBooksList(data);
+        saveBooksData(books,KSimilarBooksBox);
+    return books;
+  }
 }
+
+
+
 
 List<BookEntity> getBooksList(Map<String, dynamic> data) {
   List<BookEntity> books = [];

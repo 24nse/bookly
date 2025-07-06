@@ -5,3 +5,5 @@ const kTranstionDuration = Duration(milliseconds: 250);
 const kGtSectraFine = 'GT Sectra Fine';
 const KFeaturedBox = 'featured_box';
 const KNewsetBox = 'newset_Box';
+const KSimilarBooksBox = 'similar_books_box';
+
