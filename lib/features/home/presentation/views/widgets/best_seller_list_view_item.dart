@@ -1,7 +1,7 @@
 import 'package:bookly/conastans.dart';
 import 'package:bookly/core/utils/app_router.dart';
 import 'package:bookly/core/utils/styles.dart';
-import 'package:bookly/features/home/data/models/models/book_model/book_model.dart';
+import 'package:bookly/features/home/domain/entities/book_entity.dart';
 import 'package:bookly/features/home/presentation/views/widgets/book_rating.dart';
 import 'package:bookly/features/home/presentation/views/widgets/custom_book_item.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'package:bookly/core/widgets/custom_text.dart';
 
 class BookListViewItem extends StatelessWidget {
   const BookListViewItem({super.key, required this.book});
-final  BookModel book ;
+final  BookEntity book ;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,7 +22,7 @@ final  BookModel book ;
         height: 125,
         child: Row(
           children: [
-            CustomBookImage(imageUrl: book.volumeInfo.imageLinks?.thumbnail ?? 'assets/images/Logo.png'),
+            CustomBookImage(imageUrl: book.image ?? 'assets/images/Logo.png'),
         
            const SizedBox(width: 30),
             Expanded(
@@ -32,7 +32,7 @@ final  BookModel book ;
                   SizedBox(
                     width: MediaQuery.of(context).size.width * .5,
                     child:  CustomText(
-                      book.volumeInfo.title ?? 'Title not available',
+                      book.title ?? 'Title not available',
                       style: Styles.textStyle20.copyWith(
                         fontFamily: kGtSectraFine
                       ),
@@ -42,8 +42,8 @@ final  BookModel book ;
                   ),
                  const SizedBox(height: 3,),
                   CustomText(
-                    (book.volumeInfo.authors?.isNotEmpty ?? false)
-                      ? book.volumeInfo.authors!.first
+                    (book.authorName?.isNotEmpty ?? false)
+                      ? book.authorName!
                       : 'Unknown Author',
                     style: Styles.textStyle14,
                     maxLines: 1,
@@ -58,8 +58,8 @@ final  BookModel book ;
                     ),),
                    const Spacer(),
                     BookRating(
-                    rating: book.volumeInfo.averageRating?? 0,
-                    count: book.volumeInfo.ratingsCount??0 ,
+                    rating: book.rating?? 0,
+                    count: book.ratingsCount??0 ,
                   ),
                   ],
                  ),

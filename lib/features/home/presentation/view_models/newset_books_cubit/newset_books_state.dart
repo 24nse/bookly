@@ -10,7 +10,7 @@ sealed class NewsetBooksState extends Equatable {
 final class NewsetBooksInitial extends NewsetBooksState {}
 final class NewsetBooksLoading extends NewsetBooksState {}
 final class NewsetBooksSuccess extends NewsetBooksState {
-  final List<BookModel> books;
+  final List<BookEntity> books;
 
   const NewsetBooksSuccess(this.books);
 }
