@@ -1,8 +1,11 @@
 import 'package:bookly/conastans.dart';
+
 import 'package:bookly/core/utils/app_router.dart';
 import 'package:bookly/core/utils/service_locator.dart';
+
 import 'package:bookly/features/home/data/repos/home_repo_impl.dart';
 import 'package:bookly/features/home/domain/entities/book_entity.dart';
+import 'package:bookly/features/home/domain/use_cases/fetch_featured_books_use_case.dart';
 import 'package:bookly/features/home/presentation/view_models/featured_books_cubit/featured_books_cubit.dart';
 import 'package:bookly/features/home/presentation/view_models/newset_books_cubit/newset_books_cubit.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bookly/core/observer/app_bloc_observer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import 'features/home/domain/use_cases/fetch_newest_books_use_case.dart';
 
 void main() async {
   
@@ -33,12 +38,13 @@ class BooklyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) =>
-              FeaturedBooksCubit(getIt.get<HomeRepoImpl>())
-                ..fetchFeaturedBooks(),
+              FeaturedBooksCubit(
+              FetchFeaturedBooksUseCase(getIt.get<HomeRepoImpl>()),
+              )..fetchFeaturedBooks(),
         ),
         BlocProvider(
           create: (context) =>
-              NewsetBooksCubit(getIt.get<HomeRepoImpl>())..fetchNewsetBooks(),
+              NewsetBooksCubit( FetchNewestBooksUseCase(getIt.get<HomeRepoImpl>()),)..fetchNewsetBooks(),
         ),
       ],
       child: MaterialApp.router(
