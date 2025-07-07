@@ -21,7 +21,7 @@ class BookEntity {
   final String? previewLink;  
 
   BookEntity( {
-    this.previewLink,
+  required  this.previewLink,
     required this.bookId,
     required this.image,
     required this.title,
