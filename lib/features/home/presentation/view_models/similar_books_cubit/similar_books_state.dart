@@ -19,3 +19,10 @@ final class SimilarBooksFailure extends SimilarBooksState {
 
   const SimilarBooksFailure(this.errMessage);
 }
+
+class SimilarBooksPaginationLoading extends SimilarBooksState {}
+
+class SimilarBooksPaginationFailure extends SimilarBooksState {
+  final String errMessage;
+  const SimilarBooksPaginationFailure(this.errMessage);
+}
