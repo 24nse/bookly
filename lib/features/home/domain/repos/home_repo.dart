@@ -7,5 +7,5 @@ abstract class HomeRepo {
   Future<Either<Failures, List<BookEntity>>> fetchFeaturedBooks(
      {int pageNumber = 0,}
   );
-  Future<Either<Failures, List<BookEntity>>> fetchSimilarBooks();
+  Future<Either<Failures, List<BookEntity>>> fetchSimilarBooks({int pageNumber = 0});
 }

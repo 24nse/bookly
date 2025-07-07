@@ -60,9 +60,15 @@ class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: CustomBookImage(
-                imageUrl:widget.books[index].image ?? 'assets/images/Logo.png',
-              ),
+            child: GestureDetector(
+                  onTap: (){
+
+        GoRouter.of(context).push(AppRouter.kBookDetailsView,extra:widget.books[index]);
+      },
+              child: CustomBookImage(
+                  imageUrl:widget.books[index].image ?? 'assets/images/Logo.png',
+                ),
+            ),
           );
         },
       ),
