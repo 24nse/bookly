@@ -9,7 +9,9 @@ abstract class HomeRemoteDataSource {
   Future<List<BookEntity>> fetchFeaturedBooks({
     int pageNumber = 0,
   });
-  Future<List<BookEntity>> fetchNewsetBooks();
+  Future<List<BookEntity>> fetchNewsetBooks({
+    int pageNumber = 0,
+  });
   Future<List<BookEntity>> fetchSimilarBooks();
 }
 
@@ -33,10 +35,10 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   
 
   @override
-  Future<List<BookEntity>> fetchNewsetBooks() async {
+  Future<List<BookEntity>> fetchNewsetBooks({int pageNumber=0}) async {
     var data = await apiService.get(
       endPoint:
-          "volumes?Filtering=free-ebooks&Sorting=newest&q=subject:computer science",
+          "volumes?Filtering=free-ebooks&Sorting=newest&q=subject:computer science&startIndex=${pageNumber * 10}",
     );
     List<BookEntity> books = getBooksList(data);
         saveBooksData(books,KNewsetBox);
