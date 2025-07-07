@@ -20,6 +20,7 @@ void main() async {
   Hive.registerAdapter(BookEntityAdapter());
   setupServiceLocator();
 
+
   if (!Hive.isBoxOpen(KFeaturedBox)) {
     await Hive.openBox<BookEntity>(KFeaturedBox);
   }

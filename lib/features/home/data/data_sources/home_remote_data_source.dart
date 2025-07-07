@@ -41,7 +41,8 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
           "volumes?Filtering=free-ebooks&Sorting=newest&q=subject:Programming&startIndex=${pageNumber * 10}",
     );
     List<BookEntity> books = getBooksList(data);
-        saveBooksData(books,KNewsetBox);
+    print('DEBUG: fetchNewsetBooks page=$pageNumber, count=${books.length}');
+    saveBooksData(books,KNewsetBox);
     return books;
   }
   
