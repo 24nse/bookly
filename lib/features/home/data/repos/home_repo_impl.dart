@@ -1,6 +1,8 @@
 import 'package:bookly/core/errors/failures.dart';
+import 'package:bookly/core/utils/api_service.dart';
 import 'package:bookly/features/home/data/data_sources/home_local_data_source.dart';
 import 'package:bookly/features/home/data/data_sources/home_remote_data_source.dart';
+import 'package:bookly/features/home/data/models/models/book_model/book_model.dart';
 import 'package:bookly/features/home/domain/repos/home_repo.dart';
 import 'package:bookly/features/home/domain/entities/book_entity.dart';
 import 'package:dartz/dartz.dart';
@@ -15,14 +17,16 @@ class HomeRepoImpl implements HomeRepo {
     required this.homeLocalDataSource,
   });
   @override
-  Future<Either<Failures, List<BookEntity>>> fetchNewsetBooks() async {
+  Future<Either<Failures, List<BookEntity>>> fetchFeaturedBooks({int pageNumber=0}) async {
     try {
       List<BookEntity> books;
-      books = homeLocalDataSource.fetchFeaturedBooks();
+      books = homeLocalDataSource.getFeaturedBooks();
       if (books.isNotEmpty) {
         return right(books);
       }
-      books = await homeRemoteDataSource.fetchFeaturedBooks();
+      books = await homeRemoteDataSource.fetchFeaturedBooks(
+        pageNumber: pageNumber
+      );
       return right(books);
     } catch (e) {
       if (e is DioException) {
@@ -33,7 +37,7 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failures, List<BookEntity>>> fetchFeaturedBooks() async {
+  Future<Either<Failures, List<BookEntity>>> fetchNewsetBooks({int pageNumber=0}) async {
     try {
       List<BookEntity> books;
       books = homeLocalDataSource.fetchNewsetBooks();

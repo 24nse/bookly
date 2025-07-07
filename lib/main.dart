@@ -15,19 +15,23 @@ import 'package:bookly/core/observer/app_bloc_observer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'features/home/domain/use_cases/fetch_newest_books_use_case.dart';
-
 void main() async {
-  
-  await Hive.initFlutter(); 
+  await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
-  await Hive.openBox<BookEntity>(KFeaturedBox);
-   await Hive.openBox<BookEntity>(KNewsetBox);
-  Bloc.observer = AppBlocObserver();
   setupServiceLocator();
-  
-  runApp(const BooklyApp());
 
+  if (!Hive.isBoxOpen(KFeaturedBox)) {
+    await Hive.openBox<BookEntity>(KFeaturedBox);
+  }
+  if (!Hive.isBoxOpen(KNewsetBox)) {
+    await Hive.openBox<BookEntity>(KNewsetBox);
+  }
+
+  Bloc.observer = AppBlocObserver();
+
+  runApp(const BooklyApp());
 }
+
 
 class BooklyApp extends StatelessWidget {
   const BooklyApp({super.key});
