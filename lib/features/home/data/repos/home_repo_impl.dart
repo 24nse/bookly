@@ -18,9 +18,11 @@ class HomeRepoImpl implements HomeRepo {
   });
   @override
   Future<Either<Failures, List<BookEntity>>> fetchFeaturedBooks({int pageNumber=0}) async {
+    List<BookEntity> books;
     try {
-      List<BookEntity> books;
-      books = homeLocalDataSource.getFeaturedBooks();
+      books = homeLocalDataSource.getFeaturedBooks(
+        pageNumber: pageNumber
+      );
       if (books.isNotEmpty) {
         return right(books);
       }

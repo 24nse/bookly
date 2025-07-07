@@ -7,38 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 
-// class FeaturedBookListView extends StatelessWidget {
-//   const FeaturedBookListView({super.key, required this.books});
-// final  List<BookEntity> books;
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: MediaQuery.of(context).size.height * .3,
-//       child: ListView.builder(
-//         physics: const BouncingScrollPhysics(),
-//         itemCount:books.length,
-//         scrollDirection: Axis.horizontal,
-//         itemBuilder: (context, index) {
-//           return Padding(
-//             padding: EdgeInsets.symmetric(horizontal: 8),
-//             child: GestureDetector(
-//               onTap: () {
-//                 GoRouter.of(
-//                   context,
-//                 ).push(AppRouter.kBookDetailsView, extra:books[index]);
-//               },
-//               child: CustomBookImage(
-//                 imageUrl:books[index].image ?? 'assets/images/Logo.png',
-//               ),
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
-
-
 
 class FeaturedBooksListView extends StatefulWidget {
   const FeaturedBooksListView({Key? key, required this.books})
