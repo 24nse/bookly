@@ -11,11 +11,20 @@ part 'newset_books_state.dart';
 class NewsetBooksCubit extends Cubit<NewsetBooksState> {
   NewsetBooksCubit(this.featuredBooksUseCase) : super(NewsetBooksInitial());
   final FetchNewestBooksUseCase featuredBooksUseCase;
-  Future<void> fetchNewsetBooks()async{
-    emit(NewsetBooksLoading());
-    var result=await featuredBooksUseCase.call();
+  Future<void> fetchNewsetBooks({int pageNumber=0})async{
+    if (pageNumber == 0) {
+      emit(NewsetBooksLoading());
+    } else {
+      emit(NewsetBooksPaginationLoading());
+    }
+    
+    var result=await featuredBooksUseCase.call(pageNumber);
     result.fold((failure){
-      emit(NewsetBooksFailure(failure.errMessage));
+      if (pageNumber == 0) {
+        emit(NewsetBooksFailure(failure.errMessage));
+      } else {
+        emit(NewsetBooksPaginationFailure(failure.errMessage));
+      }
     }, (books){
       emit(NewsetBooksSuccess(books));
     });

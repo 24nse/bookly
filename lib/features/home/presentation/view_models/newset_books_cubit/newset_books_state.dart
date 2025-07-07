@@ -19,3 +19,10 @@ final class NewsetBooksFailure  extends NewsetBooksState {
 
   const NewsetBooksFailure(this.errMessage);
 }
+class NewsetBooksPaginationLoading extends NewsetBooksState {}
+
+class NewsetBooksPaginationFailure extends NewsetBooksState {
+  final String errMessage;
+
+const  NewsetBooksPaginationFailure(this.errMessage);
+}
