@@ -37,7 +37,7 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
   List<BookEntity> fetchSimilarBooks({int pageNumber = 0}) {
     int start = pageNumber * 10;
     int end = (pageNumber+1)*10;
-    var box = Hive.box<BookEntity>(kNewsetBox);
+    var box = Hive.box<BookEntity>(kSimilarBooksBox);
     int length = box.values.length;
     if (start >= length || end > length) {
       return [];

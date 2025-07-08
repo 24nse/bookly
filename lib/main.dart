@@ -27,8 +27,8 @@ void main() async {
   if (!Hive.isBoxOpen(kNewsetBox)) {
     await Hive.openBox<BookEntity>(kNewsetBox);
   }
-    if (!Hive.isBoxOpen(kNewsetBox)) {
-    await Hive.openBox<BookEntity>(kNewsetBox);
+    if (!Hive.isBoxOpen(kSimilarBooksBox)) {
+    await Hive.openBox<BookEntity>(kSimilarBooksBox);
   }
 
   Bloc.observer = AppBlocObserver();
