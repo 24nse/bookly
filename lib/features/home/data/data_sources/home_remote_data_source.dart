@@ -26,7 +26,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
     );
     List<BookEntity> books = getBooksList(data);
 
-    saveBooksData(books,KFeaturedBox);
+    saveBooksData(books,kFeaturedBox);
 
     return books;
   }
@@ -40,7 +40,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
           "volumes?Filtering=free-ebooks&Sorting=newest&q=subject:Programming&startIndex=${pageNumber * 10}",
     );
     List<BookEntity> books = getBooksList(data);
-    saveBooksData(books,KNewsetBox);
+    saveBooksData(books,kNewsetBox);
     return books;
   }
   
@@ -51,7 +51,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
           "volumes?Filtering=free-ebooks&Sorting=newest&q=subject:computer science&startIndex=${pageNumber * 10}",
     );
     List<BookEntity> books = getBooksList(data);
-    saveBooksData(books,KSimilarBooksBox);
+    saveBooksData(books,kNewsetBox);
     return books;
   }
 }

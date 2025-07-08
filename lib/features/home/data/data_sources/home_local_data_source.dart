@@ -13,7 +13,7 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
   List<BookEntity>getFeaturedBooks( {int pageNumber = 0}) {
     int start = pageNumber * 10;
     int end = (pageNumber+1)*10;
-    var box = Hive.box<BookEntity>(KFeaturedBox);
+    var box = Hive.box<BookEntity>(kFeaturedBox);
     int length = box.values.length;
     if (start >= length || end > length) {
       return [];
@@ -25,7 +25,7 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
   List<BookEntity> getNewsetBooks({int pageNumber = 0}) {
        int start = pageNumber * 10;
     int end = (pageNumber+1)*10;
-    var box = Hive.box<BookEntity>(KNewsetBox);
+    var box = Hive.box<BookEntity>(kNewsetBox);
     int length = box.values.length;
     if (start >= length || end > length) {
       return [];
@@ -37,7 +37,7 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
   List<BookEntity> fetchSimilarBooks({int pageNumber = 0}) {
     int start = pageNumber * 10;
     int end = (pageNumber+1)*10;
-    var box = Hive.box<BookEntity>(KSimilarBooksBox);
+    var box = Hive.box<BookEntity>(kNewsetBox);
     int length = box.values.length;
     if (start >= length || end > length) {
       return [];

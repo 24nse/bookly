@@ -21,14 +21,14 @@ void main() async {
   setupServiceLocator();
 
 
-  if (!Hive.isBoxOpen(KFeaturedBox)) {
-    await Hive.openBox<BookEntity>(KFeaturedBox);
+  if (!Hive.isBoxOpen(kFeaturedBox)) {
+    await Hive.openBox<BookEntity>(kFeaturedBox);
   }
-  if (!Hive.isBoxOpen(KNewsetBox)) {
-    await Hive.openBox<BookEntity>(KNewsetBox);
+  if (!Hive.isBoxOpen(kNewsetBox)) {
+    await Hive.openBox<BookEntity>(kNewsetBox);
   }
-    if (!Hive.isBoxOpen(KSimilarBooksBox)) {
-    await Hive.openBox<BookEntity>(KSimilarBooksBox);
+    if (!Hive.isBoxOpen(kNewsetBox)) {
+    await Hive.openBox<BookEntity>(kNewsetBox);
   }
 
   Bloc.observer = AppBlocObserver();
