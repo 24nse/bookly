@@ -6,29 +6,23 @@ import 'package:bookly/features/home/presentation/view_models/newset_books_cubit
 import 'package:bookly/features/home/presentation/views/widgets/newset_books_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class NewsetBookListViewBuilder extends StatefulWidget {
-  const NewsetBookListViewBuilder({super.key});
+class NewsetBookListViewBuilder extends HookWidget {
+  const NewsetBookListViewBuilder({Key? key}) : super(key: key);
 
-  @override
-  State<NewsetBookListViewBuilder> createState() =>
-      _NewsetBookListViewBuilderState();
-}
-
-class _NewsetBookListViewBuilderState extends State<NewsetBookListViewBuilder> {
-  List<BookEntity> books = [];
   @override
   Widget build(BuildContext context) {
+    final books = useState<List<BookEntity>>([]);
     return BlocConsumer<NewsetBooksCubit, NewsetBooksState>(
       listener: (context, state) {
         if (state is NewsetBooksSuccess) {
-          books.addAll(state.books);
+          books.value = List.from(books.value)..addAll(state.books);
         }
-
         if (state is NewsetBooksPaginationFailure) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(buildErrorWidget(state.errMessage));
+          ScaffoldMessenger.of(context).showSnackBar(
+            buildErrorWidget(state.errMessage),
+          );
         }
       },
       buildWhen: (previous, current) =>
@@ -37,7 +31,7 @@ class _NewsetBookListViewBuilderState extends State<NewsetBookListViewBuilder> {
         if (state is NewsetBooksSuccess ||
             state is NewsetBooksPaginationLoading ||
             state is NewsetBooksPaginationFailure) {
-          return NewsetBooksListView(books: books);
+          return NewsetBooksListView(books: books.value);
         } else if (state is NewsetBooksFailure) {
           return CustomErrorWidget(errMessage: state.errMessage);
         } else {
