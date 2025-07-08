@@ -6,24 +6,19 @@ import 'package:bookly/features/home/presentation/view_models/featured_books_cub
 import 'package:bookly/features/home/presentation/views/widgets/featured_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class FeatutedBooksListViewBuilder extends StatefulWidget {
-  const FeatutedBooksListViewBuilder({super.key});
+class FeatutedBooksListViewBuilder extends HookWidget {
+  const FeatutedBooksListViewBuilder({Key? key}) : super(key: key);
 
-  @override
-  State<FeatutedBooksListViewBuilder> createState() => _FeatutedBooksListViewBuilderState();
-}
-
-class _FeatutedBooksListViewBuilderState extends State<FeatutedBooksListViewBuilder> {
-    List<BookEntity> books = [];
   @override
   Widget build(BuildContext context) {
+    final books = useState<List<BookEntity>>([]);
     return BlocConsumer<FeaturedBooksCubit, FeaturedBooksState>(
       listener: (context, state) {
         if (state is FeaturedBooksSuccess) {
-          books.addAll(state.books);
+          books.value = List.from(books.value)..addAll(state.books);
         }
-
         if (state is FeaturedBooksPaginationFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildErrorWidget(state.errMessage),
@@ -36,7 +31,7 @@ class _FeatutedBooksListViewBuilderState extends State<FeatutedBooksListViewBuil
         if (state is FeaturedBooksSuccess ||
             state is FeaturedBooksPaginationLoading ||
             state is FeaturedBooksPaginationFailure) {
-          return FeaturedBooksListView(books: books);
+          return FeaturedBooksListView(books: books.value);
         } else if (state is FeaturedBooksFailure) {
           return CustomErrorWidget(errMessage: state.errMessage);
         } else {

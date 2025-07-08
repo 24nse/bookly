@@ -6,52 +6,39 @@ import 'package:bookly/features/home/presentation/views/widgets/custom_book_item
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class SimilarBooksListView extends StatefulWidget {
-  const SimilarBooksListView({super.key});
-
-  @override
-  State<SimilarBooksListView> createState() => _SimilarBooksListViewState();
-}
-
-class _SimilarBooksListViewState extends State<SimilarBooksListView> {
-  List books = [];
-  late final ScrollController _scrollController;
-  var nextPage = 1;
-  var isLoading = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController();
-    _scrollController.addListener(_scrollListener);
-  }
-
-  void _scrollListener() async {
-    var currentPositions = _scrollController.position.pixels;
-    var maxScrollLength = _scrollController.position.maxScrollExtent;
-    if (currentPositions >= 0.7 * maxScrollLength) {
-      if (!isLoading) {
-        isLoading = true;
-        await BlocProvider.of<SimilarBooksCubit>(context)
-            .fetchSimilarBooks(pageNumber: nextPage++);
-        isLoading = false;
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
+class SimilarBooksListView extends HookWidget {
+  const SimilarBooksListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final books = useState<List<dynamic>>([]);
+    final scrollController = useScrollController();
+    final nextPage = useState(1);
+    final isLoading = useState(false);
+
+    useEffect(() {
+      void scrollListener() async {
+        var currentPositions = scrollController.position.pixels;
+        var maxScrollLength = scrollController.position.maxScrollExtent;
+        if (currentPositions >= 0.7 * maxScrollLength) {
+          if (!isLoading.value) {
+            isLoading.value = true;
+            await BlocProvider.of<SimilarBooksCubit>(context)
+                .fetchSimilarBooks(pageNumber: nextPage.value++);
+            isLoading.value = false;
+          }
+        }
+      }
+      scrollController.addListener(scrollListener);
+      return () => scrollController.removeListener(scrollListener);
+    }, [scrollController]);
+
     return BlocConsumer<SimilarBooksCubit, SimilarBooksState>(
       listener: (context, state) {
         if (state is SimilarBooksSuccess) {
-          books.addAll(state.books);
+          books.value = List.from(books.value)..addAll(state.books);
         }
         if (state is SimilarBooksPaginationFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -67,8 +54,8 @@ class _SimilarBooksListViewState extends State<SimilarBooksListView> {
           return SizedBox(
             height: MediaQuery.of(context).size.height * .15,
             child: ListView.builder(
-              controller: _scrollController,
-              itemCount: books.length,
+              controller: scrollController,
+              itemCount: books.value.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return Padding(
@@ -77,11 +64,11 @@ class _SimilarBooksListViewState extends State<SimilarBooksListView> {
                     onTap: () {
                       GoRouter.of(context).pushReplacement(
                         AppRouter.kBookDetailsView,
-                        extra: books[index],
+                        extra: books.value[index],
                       );
                     },
                     child: CustomBookImage(
-                      imageUrl: books[index].image ??
+                      imageUrl: books.value[index].image ??
                           'https://www.bigfootdigital.co.uk/wp-content/uploads/2020/07/image-optimisation-scaled.jpg',
                     ),
                   ),

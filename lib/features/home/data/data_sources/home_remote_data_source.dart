@@ -3,7 +3,6 @@ import 'package:bookly/core/utils/api_service.dart';
 import 'package:bookly/core/utils/function/save_books.dart';
 import 'package:bookly/features/home/data/models/models/book_model/book_model.dart';
 import 'package:bookly/features/home/domain/entities/book_entity.dart';
-import 'package:hive/hive.dart';
 
 abstract class HomeRemoteDataSource {
   Future<List<BookEntity>> fetchFeaturedBooks({
@@ -41,7 +40,6 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
           "volumes?Filtering=free-ebooks&Sorting=newest&q=subject:Programming&startIndex=${pageNumber * 10}",
     );
     List<BookEntity> books = getBooksList(data);
-    print('DEBUG: fetchNewsetBooks page=$pageNumber, count=${books.length}');
     saveBooksData(books,KNewsetBox);
     return books;
   }
